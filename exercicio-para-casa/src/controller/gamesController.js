@@ -1,6 +1,22 @@
 const jogos = require('../model/games.json')
 
 const newListJogos = jogos.map(game => {
+    const newJogo = {
+        id: game.id,
+        nome: game.name,
+        genero: game.genre,
+        plataformas: game.platforms,        
+        capa: game.cover
+    }
+    return newJogo
+})
+
+const getGames = (request, response) => {
+    console.log(request.url);
+    response.status(200).send(newListJogos)
+}
+
+const ListJogosID = jogos.map(game => {
     const novoJogo = {
         id: game.id,
         nome: game.name,
@@ -15,14 +31,9 @@ const newListJogos = jogos.map(game => {
     return novoJogo
 })
 
-const getGames = (request, response) => {
-    //console.log(request.url);
-    response.status(200).send(newListJogos)
-}
-
 const getGamesById = (request, response) => {
     const id = request.params.id
-    const game = newListJogos.find(game => game.id == id)
+    const game = ListJogosID.find(game => game.id == id)
     console.log(game)
 
     if(!game) {
