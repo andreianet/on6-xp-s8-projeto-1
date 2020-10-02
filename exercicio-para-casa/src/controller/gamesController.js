@@ -1,9 +1,7 @@
 const jogos = require('../model/games.json')
 
-
-//criando uma nova lista com campos em português
 const newListJogos = jogos.map(game => {
-    const newGame = {
+    const novoJogo = {
         id: game.id,
         nome: game.name,
         genero: game.genre,
@@ -14,20 +12,29 @@ const newListJogos = jogos.map(game => {
         empresa: game.company,
         capa: game.cover
     }
-    return newGame
+    return novoJogo
 })
 
-
 const getGames = (request, response) => {
-    console.log(request.url);
+    //console.log(request.url);
     response.status(200).send(newListJogos)
 }
 
-/*const getGamesById = (request, response) => {
+const getGamesById = (request, response) => {
     const id = request.params.id
-    const game = 
-}*/
+    const game = newListJogos.find(game => game.id == id)
+    console.log(game)
+
+    if(!game) {
+       response.status(404).send({msg:"Nada Encontrado!"}) 
+    }else{
+       response.status(200).send(game)
+
+    }
+} 
 
 module.exports = {
-    getGames
+    getGames,
+    getGamesById
+
 }
