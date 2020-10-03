@@ -39,7 +39,7 @@ const getGamesById = (request, response) => {
     if(!game) {
        response.status(404).send({msg:"Nada Encontrado!"}) 
     }else{
-       response.status(200).send(game)
+      response.status(200).send(game)
 
     }
 } 
